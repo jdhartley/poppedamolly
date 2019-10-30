@@ -1,3 +1,42 @@
 <!doctype html>
-<style>html { background: url(http://media.giphy.com/media/QgIEotaQMiJXi/giphy.gif) center; } iframe { opacity: 0; pointer-events: none; }</style>
-<iframe src="https://www.youtube-nocookie.com/embed/UnEkYYIHZ84?rel=0&autoplay=1&loop=1&playlist=UnEkYYIHZ84" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"></iframe>
+<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+<script>
+if (screen.width < 500) {
+    document.querySelector('meta[name=viewport]').setAttribute('content', 'width=500, user-scalable=no');
+    document.documentElement.style.height = 500 * Math.ceil(document.documentElement.scrollHeight / 500) + 'px';
+}
+</script>
+</head>
+<style>
+html { background: url(http://media.giphy.com/media/QgIEotaQMiJXi/giphy.gif) top left; }
+audio { position: fixed; left: -100vw; opacity: 0; pointer-events: none; }
+svg { position: fixed; width: 100vw; height: 100vh; }
+html:not(.play) svg { display: none; }
+.play { background: #000; overflow: hidden; }
+</style>
+<audio autoplay loop controls="play" src="molly.mp3" type="audio/mp3"
+
+></audio>
+<script>
+const audio = document.querySelector('audio');
+let timeout;
+audio.addEventListener('loadstart', () => {
+    timeout = setTimeout(() => document.documentElement.classList.add('play'), 10);
+});
+audio.addEventListener('play', () => {
+    clearTimeout(timeout);
+    document.documentElement.classList.remove('play');
+});
+document.addEventListener('click', function autoplay() {
+    document.removeEventListener('click', autoplay);
+    document.querySelector('audio').play();
+});
+</script>
+<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+    <defs>
+        <linearGradient id="gradient" x1="0%" y1="0%" x2="0%" y2="100%">
+            <stop offset="0%" style="stop-color:#ff00f0;stop-opacity:1" />
+            <stop offset="100%" style="stop-color:#00ffe5;stop-opacity:1" />
+        </linearGradient>
+    </defs>
+    <path fill="url(#gradient)" d="M10 16.5l6-4.5-6-4.5v9zM12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8z" /></svg>
