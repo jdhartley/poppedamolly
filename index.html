@@ -18,18 +18,17 @@ html:not(.play) svg { display: none; }
 
 ></audio>
 <script>
-const audio = document.querySelector('audio');
 let timeout;
+const audio = document.querySelector('audio');
+const playOnClick = () => audio.play();
+document.addEventListener('click', playOnClick);
 audio.addEventListener('loadstart', () => {
     timeout = setTimeout(() => document.documentElement.classList.add('play'), 10);
 });
 audio.addEventListener('play', () => {
     clearTimeout(timeout);
+    document.removeEventListener('click', playOnClick);
     document.documentElement.classList.remove('play');
-});
-document.addEventListener('click', function autoplay() {
-    document.removeEventListener('click', autoplay);
-    document.querySelector('audio').play();
 });
 </script>
 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
